@@ -1,0 +1,14 @@
+<p>student-details works!</p>
+<div>
+    <h1 *ngIf="!editMode">{{student.name}}></h1>
+    <input type="text" *ngIf="editMode" [(ngModel)]="student.name">
+    <h4>{{student.author}}</h4>
+    <h4>{{student.type}}</h4>
+    <!-- <button 
+    [routerLink]="['/Students/StudentDetails', student.id]" 
+    [queryParams]="{edit: true}">Edit</button> -->
+    <button (click)="appendQuery()">Edit</button>
+    <button class="ml-3" 
+    [routerLink]="['/Students/StudentDetails', student.id]" 
+    (click)="editMode=false">Update</button>
+</div>
