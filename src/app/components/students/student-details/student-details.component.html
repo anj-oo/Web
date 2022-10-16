@@ -4,6 +4,7 @@
     <input type="text" *ngIf="editMode" [(ngModel)]="student.name">
     <h4>{{student.author}}</h4>
     <h4>{{student.type}}</h4>
+    <h4>{{student.duration | percentage: 800: 2}}</h4>
     <!-- <button 
     [routerLink]="['/Students/StudentDetails', student.id]" 
     [queryParams]="{edit: true}">Edit</button> -->

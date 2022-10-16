@@ -1,3 +1,7 @@
+import { FilterPipe } from "./pipes/filter.pipe";
+import { PercentagePipe } from "./pipes/percentage.pipe";
+import { StudenResolveService } from "./services/student-resolve.service";
+import { CanDeactiveGuardService } from "./services/candeactive-guard.service";
 import { AuthService } from "./services/auth.service";
 import { StudentGuardService } from "./services/student-guard.service";
 import { StudentsService } from "./services/students.service";
@@ -22,14 +26,17 @@ import { AppRoutingModule } from "./app_routing.module";
     ContactComponent,
     ErrorPageComponent,
     StudentsComponent,
-    StudentDetailsComponent
+    StudentDetailsComponent,
+    PercentagePipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [ StudentsService, StudentGuardService, AuthService],
+  providers: [StudentsService, StudentGuardService,
+    AuthService, CanDeactiveGuardService, StudenResolveService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

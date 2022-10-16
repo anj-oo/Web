@@ -1,3 +1,5 @@
+import { StudenResolveService } from "./services/student-resolve.service";
+import { CanDeactiveGuardService } from "./services/candeactive-guard.service";
 import { StudentGuardService } from "./services/student-guard.service";
 import { NgModule } from "@angular/core";
 import { HomeComponent } from './components/home/home.component';
@@ -12,8 +14,10 @@ const routes: Routes = [
   {path: '', redirectTo:'Home', pathMatch: "full"},
   {path: 'Home', component: HomeComponent},
   {path: 'About', component: AboutComponent},
-  {path: 'Contact', component: ContactComponent},
-  {path: 'Students', component: StudentsComponent, canActivate:[StudentGuardService]},
+  {path: 'Contact', component: ContactComponent, canDeactivate:[CanDeactiveGuardService]},
+  {path: 'Students', component: StudentsComponent,resolve:{students:StudenResolveService}},
+  // {path: 'Students', component: StudentsComponent,resolve:{students:StudenResolveService}, 
+  // canActivate:[StudentGuardService]},
   {path: 'Students/StudentDetails/:id', component: StudentDetailsComponent},
   {path: '**', component: ErrorPageComponent}
 ]

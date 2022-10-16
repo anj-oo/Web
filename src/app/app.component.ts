@@ -1,22 +1,38 @@
 import { AuthService } from "./services/auth.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private activateRoute: ActivatedRoute, private authService: AuthService) { }
+
+  displayLoadingIndicator = false;
+  constructor(private activateRoute: ActivatedRoute, private authService: AuthService,
+    private router: Router) { }
+  
   
   ngOnInit(): void {
+
+    // USED FOR FRAGMENT
     // this.activateRoute.fragment.subscribe((value) => {
     //   console.log(value);
     //   this.jumpTo(value);
     // });
-    throw new Error("Method not implemented.");
+
+    // SPINNER LOADING WHILE NAVIGATING FROM SCREEN
+    this.router.events.subscribe((routerEvent: Event) => {
+      if (routerEvent instanceof NavigationStart) {
+        this.displayLoadingIndicator = true;
+      }
+      if (routerEvent instanceof NavigationEnd ||
+        routerEvent instanceof NavigationCancel ||
+        routerEvent instanceof NavigationError) {
+        this.displayLoadingIndicator = false;
+      }
+
+    })
   }
 
   jumpTo(section:any) {

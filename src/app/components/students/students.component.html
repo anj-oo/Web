@@ -2,13 +2,43 @@
 
 
 <div >
-    <div class="mb-10">
-        <div *ngFor="let student of students;">
-            <div routerLink="/Students/StudentDetails/{{student.id}}">
-        <h1>{{student.name}}</h1>
-        <h4>{{student.author}}</h4>
-        <h4>{{student.duration}}</h4>
-            </div>
-        </div>
+          <input type="text" placeholder="Search gender" [(ngModel)]="filterText">
+
+  <div class="mb-10">
+    <div>
+      <h3>Total Student : {{totalStudents | async}}</h3>
+    </div>
+      <table>
+        <tr>
+          <td>No</td>
+          <td>Name</td>
+          <td>Mark</td>
+          <td>Gender</td>
+        </tr>
+
+        <tr *ngFor="let student of filteredStudents | filterStudent: filterText">
+          <td>{{1}}</td>
+          <td>{{student.name}}</td>
+          <td><input type="number" value="{{student.mark}}" [ngModel]="">
+            {{student.mark | percentage: 800: 2}}</td>
+          <td>{{student.gender | uppercase}}</td>
+        </tr>
+      </table>
+    <br><br>
+    <button (click)="addStudent()">Add Student</button>
+    <button (click)="changeGender()">ChangeGender</button>
+
+
+<!--        <input type="text" placeholder="Search gender" [(ngModel)]="filterText">-->
+<!--        <div *ngFor="let student of students | filterStudent: filterText">-->
+<!--            <div routerLink="/Students/StudentDetails/{{student.id}}">-->
+<!--        <h1>{{student.name}}</h1>-->
+<!--        <h4>{{student.author}}</h4>-->
+<!--        <h4>{{student.gender}}</h4>-->
+<!--        <h4><input type="number" value="{{student.mark}}" [ngModel]="">-->
+<!--          {{student.mark | percentage: 800: 2}}</h4>-->
+
+<!--            </div>-->
+<!--        </div>-->
     </div>
 </div>
